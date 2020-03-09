@@ -5,6 +5,8 @@
   - /data/sercet文件夹下的文件拷贝到其他节点，确保多实例公用同一套认证文件
   - 对于https认证，需要将生成的证书拷贝到docker,即/etc/docker/certs.d/，拷贝完成后重启docker
   - 数据库初始化时，需要执行初始化脚本，脚本在harbor-core的容器内/harbor/migrations/postgresql
+  
+  
 "# iptables"
 - 报文流向
   - 到本机某进程的报文： PREROUTING --> INPUT
