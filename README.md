@@ -1,4 +1,4 @@
-"# Harbor" 
+### Harbor 
 - 架构
 - 安装
   - 解压harbor安装包，然后执行./prepare进行初始化，/data/sercet文件夹下会生成认证需要的所需文件
@@ -7,7 +7,7 @@
   - 数据库初始化时，需要执行初始化脚本，脚本在harbor-core的容器内/harbor/migrations/postgresql
   
   
-"# iptables"
+### iptables
 - 报文流向
   - 到本机某进程的报文： PREROUTING --> INPUT
   - 由本机发出的报文： PREROUTING --> FORWARD --> POSTROUTING
