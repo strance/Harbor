@@ -18,8 +18,18 @@
   - mangle表： 拆解报文，做出修改，并重新封装的功能；内核模块：iptable_mangle
   - raw表：关闭nat表上启用的连接追踪机制：内核模块：iptable_raw
 - netfilters链包含的表及优先级（从左到右）
-  - PREROUTING: raw, mangle, nat表
-  - INPUT: mangle, （centOS7中还有nat表），filter表
-  - FORWARD: mangle, filter表
-  - OUTPUT: raw, mangle, nat, filter表
-  - POSTROUTING: mangle, nat表
+  - PREROUTING: raw --> mangle --> nat表
+  - INPUT: mangle --> （centOS7中还有nat表）--> filter表
+  - FORWARD: mangle --> filter表
+  - OUTPUT: raw --> mangle --> nat --> filter表
+  - POSTROUTING: mangle --> nat表
+
+### Target 处理方式
+- ACCEPT: 允许数据包通过
+- DROP：直接丢弃数据包，不给任何回应消息，客户端过了超时时间才会有反应。
+- REJETCT: 拒绝数据包通过，必要时会给数据发送端一个响应的消息，客户端刚请求就会收到拒绝的消息。
+- SNAT: 源地址转换，解决内网用户用同一个公网地址上网的问题。
+- MASQUERADE: SNAT的一种特殊形式，适用于动态的、临时会变的IP上。
+- DNAT: 目标地址转换。
+- REDIRECT: 在本机做端口映射。
+- LOG: 在/var/log/messages文件中记录日志信息，然后数据包传递给下一条规则，也就是说除了记录以外不对数据包做任何其他操作，仍然让下一条规则去匹配。
