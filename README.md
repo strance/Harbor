@@ -41,9 +41,30 @@
 - -n: 不对IP地址进行名称解析（比如不加-n选项 0.0.0.0/0 就显示未 anywhere）
 - --line: 显示规则的编号
 - -F: 清空规则
+- -I: 在指定位置插入规则，默认在头部，如果指定编号，如 -I INPUT 3，则新增规则的编号为3.
+- -s: 指定源地址
+- -j: 指定匹配条件满足时执行的动作即target
+- -A: 在尾部追加规则
+- -R：修改规则，除了指定规则编号，必须指定规则对应的原有匹配条件
+- -P: 指定要修改的链
 
-- 增加一条规则，拒绝192.168.1.146上的所有报文访问
+### 示例
+- 查看INPUT表的规则
   ```shell
-  $ iptables -t filter -I INPUT -s 192.168.1.146 -j DROP
+  $ iptables --line -nvL INPUT
+  ```
+- 在第二条规则前增加一条规则，拒绝192.168.1.146上的所有报文访问
+  ```shell
+  $ iptables -t filter -I INPUT 2 -s 192.168.1.146 -j DROP
+  ```
+### 保存规则
+- 规则默认保存在/etc/sysconfig/iptables文件中。
+  ```shell
+  # 查看规则
+  $ cat /etc/sysconfig/iptables
+  # 保存规则
+  $ service iptables save
+  # 如果误操作之后没有保存规则，可以重启iptables到上次保存/etc/sysconfig/iptables文件时的模样
+  $ service iptables restart
   ```
 
