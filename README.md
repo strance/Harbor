@@ -91,7 +91,7 @@
   - --connlimit-mask: 限制"某类网段"的链接数量
   
 ### 示例
-- 查看INPUT表的规则
+- 查看INPUT链的规则
   ```shell
   $ iptables --line -nvL INPUT
   ```
