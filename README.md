@@ -89,7 +89,9 @@
   $ iptables -t filter -I INPUT -p tcp --dport 22 -m -connlimit --connlimit-above 2 -j REJECT 
   ```
   - --connlimit-mask: 限制"某类网段"的链接数量
-  
+- limit模块：限流，即限制单位时间内流入包的数量。
+  - 
+
 ### 示例
 - 查看INPUT链的规则
   ```shell
@@ -98,6 +100,11 @@
 - 在第二条规则前增加一条规则，拒绝192.168.1.146上的所有报文访问
   ```shell
   $ iptables -t filter -I INPUT 2 -s 192.168.1.146 -j DROP
+  ```
+- 报文源地址只要不是192.168.1.146就拒绝
+  ```shell
+  # 只要报文源地址不是192.168.1.146，就拒绝。但是源地址是192.168.1.146的报文要看后面的规则或则默认匹配规则。
+  $ iptables -t filter -I INPUT ! -s 192.168.1.146 -j REJECT
   ```
 ### 保存规则
 - 规则默认保存在/etc/sysconfig/iptables文件中。
