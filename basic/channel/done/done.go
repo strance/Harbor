@@ -23,7 +23,8 @@ func doWork(id int, w worker) {
 	//}
 	for n := range w.c {
 		fmt.Printf("worker[%d] received %c\n", id, n)
-		go func() { w.done <- true }()
+		//go func() { w.done <- true }()
+		w.done <- true
 	}
 
 }
