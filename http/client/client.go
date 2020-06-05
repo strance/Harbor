@@ -39,7 +39,7 @@ func requestWhitHeaders()  {
 		return
 	}
 	defer response.Body.Close()
-	// httputil.DumpResponse的返回值会带上响应头信息，如果只要获取响应体，可以使用ioutil.ReadAll
+	// httputil.DumpResponse接收的参数是一个response,所以返回值是带有响应头的。如果要获取响应体，可以使用ioutil.ReadAll(response.Body)
 	bytes, err := httputil.DumpResponse(response, true)
 	if err != nil {
 		fmt.Print(err)
